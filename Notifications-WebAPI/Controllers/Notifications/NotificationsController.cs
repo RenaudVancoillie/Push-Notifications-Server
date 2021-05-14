@@ -27,12 +27,23 @@ namespace Notifications_WebAPI.Controllers.Notifications
         }
 
         [HttpPost]
-        public void SendNotification(AngularPushNotification notification)
+        [ProducesResponseType(typeof(AngularPushNotification), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
+        public ActionResult<AngularPushNotification> SendNotification([FromBody] AngularPushNotification notification)
         {
-            string message = JsonSerializer.Serialize(notification);
-            foreach (SubscriptionDTO subscription in subscriptionsService.GetAll())
+            try
             {
-                notificationsManager.SendNotification(subscription, message);
+                string message = JsonSerializer.Serialize(notification);
+                foreach (SubscriptionDTO subscription in subscriptionsService.GetAll())
+                {
+                    notificationsManager.SendNotification(subscription, message);
+                }
+                return Ok(notification);
+            }
+            catch (Exception exc)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Something went wrong: {exc.Message}");
             }
         }
     }
