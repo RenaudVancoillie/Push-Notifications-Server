@@ -18,20 +18,32 @@ namespace Notifications_WebAPI
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            _env = env;
         }
 
         public IConfiguration Configuration { get; }
+        private readonly IWebHostEnvironment _env;
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<NotificationsContext>(options =>
+            if (_env.IsDevelopment())
             {
-                options.UseSqlServer(Configuration.GetConnectionString("Default"));
-            });
+                services.AddDbContext<NotificationsContext>(options =>
+                {
+                    options.UseSqlServer(Configuration.GetConnectionString("Local"));
+                });
+            }
+            if (_env.IsProduction())
+            {
+                services.AddDbContext<NotificationsContext>(options =>
+                {
+                    options.UseNpgsql(Configuration.GetConnectionString("Heroku"));
+                });
+            }
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -41,14 +53,15 @@ namespace Notifications_WebAPI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
-            if (env.IsDevelopment())
+            if (_env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Notifications_WebAPI v1"));
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Notifications_WebAPI v1"));
 
             app.UseHttpsRedirection();
 

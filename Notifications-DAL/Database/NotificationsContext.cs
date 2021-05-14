@@ -29,7 +29,7 @@ namespace Notifications_DAL.Database
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(Configuration.GetConnectionString("Default"));
+                optionsBuilder.UseNpgsql(Configuration.GetConnectionString("Default"));
             }
         }
 
