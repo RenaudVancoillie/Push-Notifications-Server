@@ -22,5 +22,7 @@ namespace Notifications_DAL.Services.Subscriptions
         }
 
         public IEnumerable<SubscriptionDTO> GetAll() => subscriptionsRepository.GetAll();
+
+        public SubscriptionDTO Create(SubscriptionDTO subscription) => subscriptionsRepository.Create(subscription);
     }
 }

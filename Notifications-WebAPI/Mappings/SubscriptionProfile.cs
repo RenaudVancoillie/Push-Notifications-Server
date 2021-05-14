@@ -12,8 +12,8 @@ namespace Notifications_WebAPI.Mappings
     {
         public SubscriptionProfile()
         {
-            CreateMap<Subscription, SubscriptionDTO>();
-            CreateMap<Keys, KeysDTO>();
+            CreateMap<Subscription, SubscriptionDTO>().ReverseMap();
+            CreateMap<Keys, KeysDTO>().ReverseMap();
         }
     }
 }

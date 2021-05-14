@@ -7,6 +7,7 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Notifications_DAL.Database;
 using Notifications_DAL.DTO.Subscriptions;
+using Notifications_DAL.Models;
 
 namespace Notifications_DAL.Repositories.Subscriptions
 {
@@ -27,6 +28,14 @@ namespace Notifications_DAL.Repositories.Subscriptions
             return db.Subscriptions
                 .ProjectTo<SubscriptionDTO>(mapper.ConfigurationProvider)
                 .AsEnumerable();
+        }
+
+        public SubscriptionDTO Create(SubscriptionDTO subscription)
+        {
+            Subscription record = mapper.Map<Subscription>(subscription);
+            db.Subscriptions.Add(record);
+            db.SaveChanges();
+            return mapper.Map<SubscriptionDTO>(record);
         }
     }
 }
