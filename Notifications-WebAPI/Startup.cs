@@ -36,7 +36,7 @@ namespace Notifications_WebAPI
             services.AddScoped<ISubscriptionsRepository, SubscriptionsRepository>();
             services.AddScoped<ISubscriptionsService, SubscriptionsService>();
 
-            services.Configure<VapidKeys>(Configuration.GetSection("VAPID"));
+            services.Configure<VapidDetails>(Configuration.GetSection("VAPID"));
 
             if (_env.IsDevelopment())
             {

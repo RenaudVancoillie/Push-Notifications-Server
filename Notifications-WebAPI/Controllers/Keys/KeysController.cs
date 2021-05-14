@@ -14,15 +14,15 @@ namespace Notifications_WebAPI.Controllers.Keys
     [ApiController]
     public class KeysController : ControllerBase
     {
-        private readonly VapidKeysDTO vapidPublicKey;
+        private readonly VapidPublicKeyDTO vapidPublicKey;
 
-        public KeysController(IOptions<VapidKeys> vapidKeys)
+        public KeysController(IOptions<VapidDetails> vapidKeys)
         {
-            vapidPublicKey = new VapidKeysDTO() { PublicKey = vapidKeys.Value.PublicKey };
+            vapidPublicKey = new VapidPublicKeyDTO() { PublicKey = vapidKeys.Value.PublicKey };
         }
 
         [HttpGet("vapid")]
-        public ActionResult<VapidKeysDTO> GetVapidKey()
+        public ActionResult<VapidPublicKeyDTO> GetVapidKey()
         {
             return Ok(vapidPublicKey);
         }

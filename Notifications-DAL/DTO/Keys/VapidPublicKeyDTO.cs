@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace Notifications_WebAPI.Helpers
+namespace Notifications_DAL.DTO.Keys
 {
-    public class VapidKeys
+    public class VapidPublicKeyDTO
     {
         public string PublicKey { get; set; }
-        public string PrivateKey { get; set; }
     }
 }
