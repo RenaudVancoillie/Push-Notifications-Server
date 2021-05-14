@@ -13,6 +13,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Notifications_DAL.Database;
+using Notifications_DAL.Repositories.Subscriptions;
+using Notifications_DAL.Services.Subscriptions;
 
 namespace Notifications_WebAPI
 {
@@ -30,6 +32,9 @@ namespace Notifications_WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<ISubscriptionsRepository, SubscriptionsRepository>();
+            services.AddScoped<ISubscriptionsService, SubscriptionsService>();
+
             if (_env.IsDevelopment())
             {
                 services.AddDbContext<NotificationsContext>(options =>
