@@ -4,9 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Configuration;
 using Notifications_DAL.DTO.Keys;
-using Notifications_WebAPI.Helpers;
 
 namespace Notifications_WebAPI.Controllers.Keys
 {
@@ -16,9 +15,9 @@ namespace Notifications_WebAPI.Controllers.Keys
     {
         private readonly VapidPublicKeyDTO vapidPublicKey;
 
-        public KeysController(IOptions<VapidDetails> vapidKeys)
+        public KeysController(IConfiguration configuration)
         {
-            vapidPublicKey = new VapidPublicKeyDTO() { PublicKey = vapidKeys.Value.PublicKey };
+            vapidPublicKey = new VapidPublicKeyDTO() { PublicKey = configuration.GetSection("VAPID").GetSection("PublicKey").Value };
         }
 
         [HttpGet("vapid")]

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Notifications_WebAPI.Helpers.PushNotifications
@@ -20,10 +19,5 @@ namespace Notifications_WebAPI.Helpers.PushNotifications
         public IList<int> Vibrate { get; set; }
         public IDictionary<string, object> Data { get; set; }
         public IList<NotificationAction> Actions { get; set; }
-
-        public string ToJson()
-        {
-            return JsonSerializer.Serialize(this);
-        }
     }
 }
