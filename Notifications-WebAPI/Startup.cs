@@ -15,6 +15,7 @@ using Microsoft.OpenApi.Models;
 using Notifications_DAL.Database;
 using Notifications_DAL.Repositories.Subscriptions;
 using Notifications_DAL.Services.Subscriptions;
+using Notifications_WebAPI.Helpers;
 
 namespace Notifications_WebAPI
 {
@@ -34,6 +35,8 @@ namespace Notifications_WebAPI
         {
             services.AddScoped<ISubscriptionsRepository, SubscriptionsRepository>();
             services.AddScoped<ISubscriptionsService, SubscriptionsService>();
+
+            services.Configure<VapidKeys>(Configuration.GetSection("VAPID"));
 
             if (_env.IsDevelopment())
             {
