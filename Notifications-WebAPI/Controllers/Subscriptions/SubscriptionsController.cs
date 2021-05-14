@@ -20,7 +20,32 @@ namespace Notifications_WebAPI.Controllers.Subscriptions
             this.subscriptionsService = subscriptionsService;
         }
 
+        [HttpGet("{id:int:min(1)}")]
+        [ProducesResponseType(typeof(SubscriptionDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
+        public ActionResult<SubscriptionDTO> GetById(int id)
+        {
+            try
+            {
+                SubscriptionDTO subscription = subscriptionsService.GetById(id);
+                if (subscription == null)
+                {
+                    return NotFound($"Subscription with id {id} not found.");
+                }
+                return Ok(subscription);
+            }
+            catch (Exception exc)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Something went wrong: {exc.Message}");
+            }
+        }
+
         [HttpPost]
+        [ProducesResponseType(typeof(SubscriptionDTO), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
         public ActionResult<SubscriptionDTO> Create([FromBody] SubscriptionDTO subscription)
         {
             try

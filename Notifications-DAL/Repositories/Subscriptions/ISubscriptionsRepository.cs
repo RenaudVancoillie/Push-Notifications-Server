@@ -9,6 +9,7 @@ namespace Notifications_DAL.Repositories.Subscriptions
 {
     public interface ISubscriptionsRepository
     {
+        SubscriptionDTO GetById(int id);
         IEnumerable<SubscriptionDTO> GetAll();
         SubscriptionDTO Create(SubscriptionDTO subscription);
     }

@@ -23,6 +23,14 @@ namespace Notifications_DAL.Repositories.Subscriptions
             this.mapper = mapper;
         }
 
+        public SubscriptionDTO GetById(int id)
+        {
+            return db.Subscriptions
+                .Where(s => s.Id == id)
+                .ProjectTo<SubscriptionDTO>(mapper.ConfigurationProvider)
+                .SingleOrDefault();
+        }
+
         public IEnumerable<SubscriptionDTO> GetAll()
         {
             return db.Subscriptions

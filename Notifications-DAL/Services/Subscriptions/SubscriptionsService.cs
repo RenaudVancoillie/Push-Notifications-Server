@@ -21,6 +21,8 @@ namespace Notifications_DAL.Services.Subscriptions
             this.mapper = mapper;
         }
 
+        public SubscriptionDTO GetById(int id) => subscriptionsRepository.GetById(id);
+
         public IEnumerable<SubscriptionDTO> GetAll() => subscriptionsRepository.GetAll();
 
         public SubscriptionDTO Create(SubscriptionDTO subscription) => subscriptionsRepository.Create(subscription);
