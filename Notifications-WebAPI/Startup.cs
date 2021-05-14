@@ -61,7 +61,7 @@ namespace Notifications_WebAPI
             }
 
             app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Notifications_WebAPI v1"));
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Notifications WebAPI v1"));
 
             app.UseHttpsRedirection();
 
