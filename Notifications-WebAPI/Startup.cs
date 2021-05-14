@@ -45,6 +45,8 @@ namespace Notifications_WebAPI
                 });
             }
 
+            services.AddAutoMapper(typeof(Startup));
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
