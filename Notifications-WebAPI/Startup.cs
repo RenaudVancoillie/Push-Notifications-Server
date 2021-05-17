@@ -53,6 +53,13 @@ namespace Notifications_WebAPI
                 });
             }
 
+            services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
+            {
+                builder.AllowAnyMethod()
+                       .AllowAnyHeader()
+                       .AllowAnyOrigin();
+            }));
+
             services.AddAutoMapper(typeof(Startup));
 
             services.AddControllers();
@@ -72,6 +79,8 @@ namespace Notifications_WebAPI
 
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Notifications WebAPI v1"));
+
+            app.UseCors("CorsPolicy");
 
             app.UseHttpsRedirection();
 
