@@ -13,7 +13,7 @@ namespace Notifications_DAL.Models
         }
 
         public int Id { get; set; }
-        public string P256hd { get; set; }
+        public string P256dh { get; set; }
         public string Auth { get; set; }
 
         public virtual ICollection<Subscription> Subscriptions { get; set; }

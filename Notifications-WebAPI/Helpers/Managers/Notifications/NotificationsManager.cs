@@ -27,7 +27,7 @@ namespace Notifications_WebAPI.Helpers.Managers.Notifications
         public void SendNotification(SubscriptionDTO subscription, string message)
         {
             PushSubscription pushSubscription = new(subscription.Endpoint, 
-                subscription.Keys.P256hd, subscription.Keys.Auth);
+                subscription.Keys.P256dh, subscription.Keys.Auth);
             VapidDetails vapidDetails = new(subject, publicKey, privateKey);
             webPushClient.SendNotification(pushSubscription, message, vapidDetails);
         }

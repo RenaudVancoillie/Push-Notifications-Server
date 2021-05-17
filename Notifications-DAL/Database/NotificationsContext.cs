@@ -48,10 +48,10 @@ namespace Notifications_DAL.Database
                     .HasMaxLength(250)
                     .HasColumnName("auth");
 
-                entity.Property(e => e.P256hd)
+                entity.Property(e => e.P256dh)
                     .IsRequired()
                     .HasMaxLength(250)
-                    .HasColumnName("p256hd");
+                    .HasColumnName("p256dh");
             });
 
             modelBuilder.Entity<Subscription>(entity =>
