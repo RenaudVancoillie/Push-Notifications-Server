@@ -9,7 +9,7 @@ namespace Notifications_DAL.Models
     {
         public int Id { get; set; }
         public string Endpoint { get; set; }
-        public float ExpirationTime { get; set; }
+        public float? ExpirationTime { get; set; }
         public int KeysId { get; set; }
 
         public virtual Keys Keys { get; set; }

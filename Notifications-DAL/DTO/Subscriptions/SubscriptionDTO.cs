@@ -9,7 +9,7 @@ namespace Notifications_DAL.DTO.Subscriptions
     public class SubscriptionDTO
     {
         public string Endpoint { get; set; }
-        public float ExpirationTime { get; set; }
+        public float? ExpirationTime { get; set; }
         public KeysDTO Keys { get; set; }
     }
 }
