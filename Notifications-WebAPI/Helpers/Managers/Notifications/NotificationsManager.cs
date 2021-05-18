@@ -10,17 +10,16 @@ namespace Notifications_WebAPI.Helpers.Managers.Notifications
 {
     public class NotificationsManager : INotificationsManager
     {
-        private readonly string subject;
-        private readonly string publicKey;
-        private readonly string privateKey;
-
+        private readonly VapidDetails vapidDetails;
         private readonly WebPushClient webPushClient;
 
         public NotificationsManager(IConfiguration configuration)
         {
-            subject = configuration.GetSection("subject").Value;
-            publicKey = configuration.GetSection("publicKey").Value;
-            privateKey = configuration.GetSection("privateKey").Value;
+            IConfigurationSection vapidConfiguration = configuration.GetSection("VAPID");
+            string subject = vapidConfiguration.GetSection("Subject").Value;
+            string publicKey = vapidConfiguration.GetSection("PublicKey").Value;
+            string privateKey = vapidConfiguration.GetSection("PrivateKey").Value;
+            vapidDetails = new(subject, publicKey, privateKey);
             webPushClient = new WebPushClient();
         }
 
@@ -28,7 +27,6 @@ namespace Notifications_WebAPI.Helpers.Managers.Notifications
         {
             PushSubscription pushSubscription = new(subscription.Endpoint, 
                 subscription.Keys.P256dh, subscription.Keys.Auth);
-            VapidDetails vapidDetails = new(subject, publicKey, privateKey);
             webPushClient.SendNotification(pushSubscription, message, vapidDetails);
         }
     }
