@@ -27,13 +27,13 @@ namespace Notifications_WebAPI.Controllers.Notifications
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(GeneralNotification), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(AngularPushNotification), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
-        public ActionResult<AngularPushNotification> SendNotification([FromBody] GeneralNotification notification)
+        public ActionResult<AngularPushNotification> SendNotification([FromBody] AngularPushNotification notification)
         {
             try
             {
-                string message = JsonSerializer.Serialize(notification);
+                string message = notification.ToJson();
                 foreach (SubscriptionDTO subscription in subscriptionsService.GetAll())
                 {
                     notificationsManager.SendNotification(subscription, message);
