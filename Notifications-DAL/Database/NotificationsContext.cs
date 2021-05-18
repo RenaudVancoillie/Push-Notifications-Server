@@ -68,7 +68,7 @@ namespace Notifications_DAL.Database
                     .HasMaxLength(250)
                     .HasColumnName("endpoint");
 
-                entity.Property(e => e.ExpirationTime).HasColumnName("expirationTime");
+                entity.Property(e => e.ExpirationTime).HasColumnName("expiration");
 
                 entity.Property(e => e.KeysId).HasColumnName("keys_id");
 
