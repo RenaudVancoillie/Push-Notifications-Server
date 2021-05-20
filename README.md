@@ -6,3 +6,6 @@ A live version of this application runs publicly hosted on [Heroku](https://safe
 
 ## Run
 Get the frontend application from [this repository](https://github.com/RenaudVancoillie/Push-Notifications-Client) to view the API in action!
+
+## Database
+By default the application makes use of a local Microsoft SQL Server database called "Notifications". If this has been set up locally, running the `Update-Database` command in the NuGet Package Manager Console will build the database. 
